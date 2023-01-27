@@ -3,7 +3,7 @@ const app = require('../../app');
 const newTodo = require('../mock-data/new-todo.json');
 const endpointUrl = '/todos/';
 describe(endpointUrl, () => {
-  it('POST ' + endpointUrl, async () => {
+  it('POST' + endpointUrl, async () => {
     const response = await request(app)
       .post(endpointUrl)
       .send(newTodo);
