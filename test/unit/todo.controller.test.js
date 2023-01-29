@@ -4,6 +4,7 @@ const httpMocks = require('node-mocks-http');
 const newTodo = require('../mock-data/new-todo.json');
 const mongoose = require('mongoose');
 TodoModel.create = jest.fn();
+TodoModel.find = jest.fn();
 
 let req, res, next;
 
@@ -45,6 +46,34 @@ describe('TodoController.createTodo', () => {
     const rejectedPromise = Promise.reject(error);
     TodoModel.create.mockReturnValue(rejectedPromise);
     await TodoController.createTodo(req, res, next);
+
+    expect(next).toBeCalledWith(error);
+  });
+});
+
+describe('TodoController.getTodos', () => {
+  it('should have a getTodos function', () => {
+    expect(typeof TodoController.getTodos).toBe('function');
+  });
+  it('should call TodoModel.find', async () => {
+    await TodoController.getTodos(req, res, next);
+    expect(TodoModel.find).toBeCalled();
+  });
+  it('should return 200 and all todos', async () => {
+    TodoModel.find.mockReturnValue([newTodo]);
+
+    await TodoController.getTodos(req, res, next);
+
+    expect(res.statusCode).toBe(200);
+    expect(res._isEndCalled()).toBeTruthy();
+    expect(res._getJSONData()).toStrictEqual([newTodo]);
+  });
+  it('should handle error', async () => {
+    const error = { message: 'Error Message' };
+    const rejectedPromise = Promise.reject(error);
+    TodoModel.find.mockReturnValue(rejectedPromise);
+
+    await TodoController.getTodos(req, res, next);
 
     expect(next).toBeCalledWith(error);
   });

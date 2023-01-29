@@ -1,14 +1,17 @@
 const express = require('express');
 const mongodb = require('./mongodb/mongodb.connect');
-const app = express();
-mongodb.connect();
-app.use(express.json());
 const todoRoutes = require('./routes/todo.routes');
+const errorHandlingMiddleware = require('./middlewares/error-handling.middleware');
+mongodb.connect();
+
+const app = express();
+app.use(express.json());
+
+app.use('/todos', todoRoutes);
+app.use(errorHandlingMiddleware);
 
 app.get('/', (request, response) => {
   response.json({ message: 'hello world!!' });
 });
-
-app.use('/todos', todoRoutes);
 
 module.exports = app;
