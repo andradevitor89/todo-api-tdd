@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start-local": "MONGO_CONN=mongodb://todo-api:todotddnode100@localhost:27017/todo-tdd node index.js",
     "test": "jest",
     "test-watch": "jest --watchAll"
   },

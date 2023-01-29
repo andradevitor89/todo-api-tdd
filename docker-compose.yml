@@ -1,5 +1,19 @@
 version: '3.7'
 services:
+  todo-api:
+    depends_on:
+      - mongodb_container
+    build:
+      context: .
+    environment:
+      - PORT=8080
+      - MONGO_CONN=mongodb://todo-api:todotddnode100@mongodb_container:27017/todo-tdd
+    ports:
+      - "8080:8080"
+    command: >
+      sh -c "npm run start"
+    restart: always
+
   mongodb_container:
     image: mongo:latest
     environment:
