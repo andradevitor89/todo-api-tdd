@@ -52,3 +52,31 @@ describe('GET ' + endpointUrl + ':id', () => {
     expect(response.statusCode).toBe(204);
   });
 });
+
+describe('PUT ' + endpointUrl + ':id', () => {
+  it('should return success', async () => {
+    const payload = {
+      title: 'New name',
+      done: true,
+    };
+    const response = await request(app)
+      .put(endpointUrl + firstTodo._id)
+      .send(payload);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body.title).toBe(payload.title);
+    expect(response.body.done).toBe(payload.done);
+  });
+  it('should return 404 when id is not found', async () => {
+    const payload = {
+      title: 'New name',
+      done: false,
+    };
+
+    const response = await request(app)
+      .put(endpointUrl + '63d677711d50c82dc7a9794A')
+      .send(payload);
+
+    expect(response.statusCode).toBe(404);
+  });
+});
