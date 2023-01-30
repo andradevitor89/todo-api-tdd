@@ -7,7 +7,8 @@
     "start": "node index.js",
     "start-local": "MONGO_CONN=mongodb://todo-api:todotddnode100@localhost:27017/todo-tdd node index.js",
     "test": "jest",
-    "test-watch": "jest --watchAll"
+    "test-watch": "jest --watchAll",
+    "swagger-autogen": "node swagger.js"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +16,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.6.9",
-    "node-mocks-http": "^1.7.6"
+    "node-mocks-http": "^1.7.6",
+    "swagger-autogen": "^2.23.0",
+    "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
