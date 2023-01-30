@@ -2,17 +2,35 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
+    "title": "Todo API",
     "description": ""
   },
   "host": "localhost:8080",
   "basePath": "/",
   "schemes": ["http"],
   "paths": {
-    "/": {
+    "/todos": {
       "post": {
-        "description": "",
-        "parameters": [],
+        "tags": ["Todos"],
+        "description": "Create Todo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "done": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -20,7 +38,8 @@
         }
       },
       "get": {
-        "description": "",
+        "tags": ["Todos"],
+        "description": "Get all Todos",
         "parameters": [],
         "responses": {
           "200": {
@@ -29,9 +48,10 @@
         }
       }
     },
-    "/{id}": {
+    "/todos/{id}": {
       "get": {
-        "description": "",
+        "tags": ["Todos"],
+        "description": "Get Todo by Id",
         "parameters": [
           {
             "name": "id",
@@ -50,13 +70,30 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": ["Todos"],
+        "description": "Update Todo",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "done": {
+                  "type": "boolean"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -69,7 +106,8 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": ["Todos"],
+        "description": "Delete Todo",
         "parameters": [
           {
             "name": "id",
