@@ -4,16 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start-local": "MONGO_CONN=mongodb://todo-api:todotddnode100@localhost:27017/todo-tdd node index.js",
+    "start": "node src/index.js",
+    "start-local": "MONGO_CONN=mongodb://todo-api:todotddnode100@localhost:27017/todo-tdd node src/index.js",
     "test": "jest",
-    "test-watch": "jest --watchAll",
+    "test-local": "MONGO_CONN=mongodb://todo-api:todotddnode100@localhost:27017/todo-tdd jest",
+    "test-watch": "MONGO_CONN=mongodb://todo-api:todotddnode100@localhost:27017/todo-tdd jest --watchAll",
     "swagger-autogen": "node swagger.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.6.9",
     "node-mocks-http": "^1.7.6",
